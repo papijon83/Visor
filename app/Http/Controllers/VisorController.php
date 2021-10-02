@@ -33,6 +33,8 @@ class VisorController extends Controller
         fwrite($fileXml,$archivo);
         fclose($fileXml);
         
-        return url("Docs/".$idDocumentoDigital.".docx");
+        $ruta = url("Docs/".$idDocumentoDigital.".docx");
+
+        return view('visor',['ruta' => $ruta]);
     }
 }
