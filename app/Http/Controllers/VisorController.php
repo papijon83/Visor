@@ -21,11 +21,19 @@ class VisorController extends Controller
     }
 
     public function visor(Request $request)
-    {
+    {   
         $idDocumentoDigital = $request->query('idDocumentoDigital');
+        $fichero = $request->query('fichero');
 
-        $this->modelDocumentos = new Documentos();
-        $archivo = $this->modelDocumentos->get_fichero_documento($idDocumentoDigital);
+        if(isset($fichero)){
+            $idficherodocumento = $request->query('idDocumentoDigital');
+            $this->modelDocumentos = new Documentos();
+            $archivo = $this->modelDocumentos->get_fichero_documento($idficherodocumento,true);
+        }else{
+            $idDocumentoDigital = $request->query('idDocumentoDigital');
+            $this->modelDocumentos = new Documentos();
+            $archivo = $this->modelDocumentos->get_fichero_documento($idDocumentoDigital,false);
+        }
 
         $path = base_path().'/public/Docs';
         $rutaArchivos = $path;
